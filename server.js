@@ -65,13 +65,13 @@ app.post('/submit_application', upload.single('paymentScreenshot'), (req, res) =
   console.log(req.file); // Log the file upload
   // Validate phone number length
   if (phonenumber.length !== 10) {
-    return res.status(400).json({ success: false, message: 'Phone number must be 10 digits not what you hae done!' });
+    return res.status(400).json({ success: false, message: 'Phone number must be 10 digits! Please enter correct phone number!' });
   }
 
   // Check if the user already exists based on email (duplicate check)
   fs.readFile('applications.csv', 'utf8', (err, data) => {
     if (err) {
-      return res.status(500).json({ success: false, message: 'Error reading CSV file' });
+      return res.status(500).json({ success: false, message: 'Error reading your data' });
     }
 
     // If CSV file is empty or no data exists, proceed to write
