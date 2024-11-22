@@ -9,7 +9,7 @@ const cors = require('cors');
 
 // Initialize Express app
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;  // Use the PORT environment variable provided by Render
 
 // Setup middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -82,7 +82,7 @@ app.post('/submit_application', upload.single('paymentScreenshot'), (req, res) =
           res.json({ success: true, message: 'Application submitted successfully' });
         })
         .catch((error) => {
-          res.status(500).json({ success: false, message: 'Error writing to CSV file' });
+          res.status(500).json({ success: false, message: 'Error writing your data' });
         });
     } else {
       // If data exists, check for duplicates by email
@@ -100,7 +100,7 @@ app.post('/submit_application', upload.single('paymentScreenshot'), (req, res) =
           res.json({ success: true, message: 'Application submitted successfully' });
         })
         .catch((error) => {
-          res.status(500).json({ success: false, message: 'Error writing to CSV file' });
+          res.status(500).json({ success: false, message: 'Error writing your data' });
         });
     }
   });
